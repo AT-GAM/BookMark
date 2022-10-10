@@ -56,6 +56,9 @@
             displayCode();
             addEventImage();
             clearInputs();
+            
+        // we will storage arryOfCards in the local 
+        localStorage.setItem("AllWebsites", JSON.stringify(arryOfCard));
 
 
 
@@ -67,7 +70,7 @@
         else {
             window.alert("enter a valid website url or website name")
         }
-
+ 
     }
 
     //clear function clear all inputs 
@@ -90,8 +93,6 @@
 
             })
 
-        // we will storage arryOfCards in the local 
-        localStorage.setItem("AllWebsites", JSON.stringify(arryOfCard));
 
 
     }
@@ -102,7 +103,7 @@
         let htmlCode = document.querySelector(".row");
         htmlCode.innerHTML = "";
 
-        for (let i = 0; i < arryOfCard.length+1; i++) {
+        for (let i = 0; i < arryOfCard.length; i++) {
 
             htmlCode.innerHTML += `<div class="col-lg-3 col-md-4 col-sm-6 card   mb-3 ">
             <div class=" border-info border-3  text-center ">
@@ -124,11 +125,12 @@
 
     function DeletsButton(i) {
         arryOfCard.splice(i, 1);
-        displayCode();
-        addEventImage();
-        
+
         localStorage.clear();
         localStorage.setItem("AllWebsites", JSON.stringify(arryOfCard));
+        displayCode();
+        addEventImage();
+
 
 
 
@@ -142,7 +144,7 @@
     function addEventImage() {
         let Images = document.querySelector(".row").querySelectorAll("img");
 
-        for (let i = 0; i < Images.length+1; i++) {
+        for (let i = 0; i < Images.length; i++) {
             Images[i].addEventListener("click", function () {
 
                 document.querySelector(".layer").classList.remove("d-none");
@@ -152,9 +154,11 @@
                     if (document.querySelector(".layer input").value !== "") {
                         arryOfCard[i].imgSrc = document.querySelector(".layer input").value;
                         clearInputs();
-                        localStorage.setItem("AllWebsites", JSON.stringify(arryOfCard));
                         displayCode();
                         addEventImage();
+                        localStorage.clear();
+                        localStorage.setItem("AllWebsites", JSON.stringify(arryOfCard));
+
                     }
                     document.querySelector('.layer').classList.add("d-none");
 
